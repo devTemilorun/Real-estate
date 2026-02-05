@@ -3,29 +3,34 @@ import { toast } from 'react-toastify';
 
 const Contact = () => {
 
-
     const [result, setResult] = useState("");
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        setResult("Sending.....")
+        setResult("Sending.....");
+        
         const formData = new FormData(event.target);
-        formData.append("access_key", "efc4b4f2-09fa-44ca-9551-1d846eacc335");
 
+        const name = formData.get("Name"); 
+        
+        formData.append("access_key", "efc4b4f2-09fa-44ca-9551-1d846eacc335");
+        formData.append("subject", `New Contact Form Submission from ${name}`);
+        formData.append("from_name", "Estate Website");
+        
         const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
+            method: "POST",
+            body: formData,
         });
 
         const data = await response.json();
-        if(data.success){
-            setResult("")
-            toast.success("Form Submitted Successfully")
+        if (data.success) {
+            setResult("");
+            toast.success("Form Submitted Successfully");
             event.target.reset();
-        }else{
-            console.log("Error", data)
-            toast.error(data.message)
-            setResult("")
+        } else {
+            console.log("Error", data);
+            toast.error(data.message || "Form submission failed");
+            setResult("");
         }
     };
 
@@ -33,7 +38,7 @@ const Contact = () => {
     <div id='Contact' className='text-center p-6 py-20 lg:px-32 w-full overflow-hidden'>
       <h1 className='text-2xl sm:text-4xl font-bold mb-2 text-center'>Contact <span className='underline underline-offset-4 decoration-1 under font-light'>with Us</span></h1>
       <p className='text-gray-500 mx-auto max-w-80 text-center mb-12'>Ready to Make a Move? Let's Build Your Future Together</p>
-      
+
       <form onSubmit={onSubmit} className='max-w-2xl mx-auto text-gray-600 pt-8'>
         <div className='flex flex-wrap'>
             <div className='w-full md:w-1/2 text-left'>
