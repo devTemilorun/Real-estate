@@ -3,6 +3,8 @@ import { assets } from '../assets/assets'
 
 const Footer = () => {
 
+  const year = new Date().getFullYear();
+
   const footerLinks = [
         {
             type: 'whatsApp',
@@ -51,11 +53,11 @@ const Footer = () => {
       </div>
       
       <div className='border-t border-gray-700 py-4 mt-10 text-center text-gray-500'>
-        Copyright 2026 - dev.Temilorun. All Right Reserved
-        <div className='flex items-center justify-center gap-4'>
+        Copyright {year} - dev.Temilorun. All Right Reserved
+        <div className='flex items-center justify-center gap-6'>
             {footerLinks.map((link)=>(
                 <a key={link.label} href={link.url} style={{ borderRadius: "100% "}}
-                className='w-6 h-6 dark:px-1 dark:py-1 dark:bg-white items-center dark:rounded-full flex' target='_blank' rel='noopener noreferrer' > <img src={link.displayImage} alt="" /> </a>
+                className='w-6 h-6 mt-2 flex hover:scale-130' target='_blank' rel='noopener noreferrer' > <img src={link.displayImage} alt="" /> </a>
             ))}
         </div>
       </div>
