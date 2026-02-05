@@ -27,7 +27,6 @@ const Contact = () => {
             toast.error(data.message)
             setResult("")
         }
-        // setResult(data.success ? "Success!" : "Error");
     };
 
   return (
