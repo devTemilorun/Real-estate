@@ -1,30 +1,13 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import { motion } from "framer-motion"
 
 const Footer = () => {
 
-  const year = new Date().getFullYear();
-
-  const footerLinks = [
-        {
-            type: 'whatsApp',
-            label: 'WhatsApp',
-            url: `https://wa.me/2347031225674?text=Hello!%20I'm%20interested%20in%20your%20services.`,
-            displayImage: assets.whatsapp_icon
-        },
-        {
-            type: 'email',
-            label: 'Email',
-            url: `mailto:dev.temilorun@gmail.com?subject=Inquiry&body=Hello,%0A%0AI'd%20like%20to%20discuss...`,
-            displayImage: assets.gmail_icon
-        },
-        {
-            type: 'linkedin',
-            label: 'LinkedIn',
-            url: 'https://www.linkedin.com/in/olawuni-israel-oluwatemilorun-85714a324',
-            displayImage: assets.linkedin_icon
-        },
-    ]
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+  }
 
   return (
     <div id='Footer' className='pt-10 px-4 md:px-20 lg:px-32 bg-gray-900 w-full overflow-hiddden'>
@@ -52,15 +35,21 @@ const Footer = () => {
         </div>
       </div>
       
-      <div className='border-t border-gray-700 py-4 mt-10 text-center text-gray-500'>
-        Copyright {year} - dev.Temilorun. All Right Reserved
-        <div className='flex items-center justify-center gap-6'>
-            {footerLinks.map((link)=>(
-                <a key={link.label} href={link.url} style={{ borderRadius: "100% "}}
-                className='w-6 h-6 mt-2 flex hover:scale-130' target='_blank' rel='noopener noreferrer' > <img src={link.displayImage} alt="" /> </a>
-            ))}
-        </div>
-      </div>
+      <motion.div
+          variants={itemVariants}
+          className="mt-16 pt-8 pb-4 block border-t border-gray-800 text-center text-sm text-gray-500 mb-1"
+        >
+          <p>
+            © {new Date().getFullYear()} Olawuni Israel Oluwatemilorun.  
+            <span className="mx-3">•</span>
+            Built with passion & code.
+          </p>
+          <a 
+            className='text-lg underline cursor-pointer hover:text-xl'
+            href={`mailto:dev.temilorun@gmail.com?subject=Inquiry&body=Hello,%0A%0AI'd%20like%20to%20discuss...`}>
+             drop a message
+            </a>
+        </motion.div>
     </div>
   )
 }
